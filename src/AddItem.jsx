@@ -23,7 +23,7 @@ export default function AddItem({ onAddItem, products }) {
 }
 
 function AddItemElement({ setItemAdding, onAddItem, products }) {
-  let newProduct = { name: "", description: "", price: 0 };
+  let newProduct = { name: "", description: "", price: 0, liked: false };
 
   function handleCloseClick(event) {
     if (event.currentTarget != event.target) return;
