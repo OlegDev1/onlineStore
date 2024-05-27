@@ -1,10 +1,18 @@
 import "./AddItemElement.css";
 import { useState, useContext } from "react";
 import { ProductsContext } from "./ProductsContext";
+import { ProductPropertiesContext } from "./ProductsPropertiesContext";
 
 export default function AddItemElement({ setItemAdding }) {
   const [products, setProducts] = useContext(ProductsContext);
-  let [newProduct, setNewProduct] = useState({ name: "", description: "", price: 0, liked: false });
+  const newProductId = products.length;
+  const [newProduct, setNewProduct] = useState({
+    id: newProductId,
+    name: "",
+    description: "",
+    price: 0,
+  });
+  const [productsProperties, setProductsProperties] = useContext(ProductPropertiesContext);
 
   function handleCloseClick(event) {
     if (event.currentTarget != event.target) return;
@@ -13,6 +21,7 @@ export default function AddItemElement({ setItemAdding }) {
 
   function handleSubmitClick() {
     setProducts([...products, newProduct]);
+    setProductsProperties({ ...productsProperties, [newProductId]: { liked: false } });
     setItemAdding(false);
   }
 

@@ -1,23 +1,24 @@
 import { useContext } from "react";
 import { ProductsContext } from "./ProductsContext";
+import { ProductPropertiesContext } from "./ProductsPropertiesContext";
 import "./Items.css";
 
 export default function Items() {
   const [products, setProducts] = useContext(ProductsContext);
+  const [productsProperties, setProductsProperties] = useContext(ProductPropertiesContext);
 
   function handleDeleteClick(product) {
     setProducts(products.filter((item) => item !== product));
   }
 
   function handleLikeClick(product) {
-    setProducts(
-      products.map((item) => {
-        if (item == product) {
-          item.liked = !item.liked;
-        }
-        return item;
-      })
-    );
+    setProductsProperties({
+      ...productsProperties,
+      [product.id]: {
+        ...productsProperties[product.id],
+        liked: !productsProperties[product.id].liked,
+      },
+    });
   }
 
   return (
@@ -28,7 +29,7 @@ export default function Items() {
             <>
               <li className="content__product" key={product.name}>
                 <h2 className="product__title">
-                  {product.liked ? "❤️" : ""}
+                  {productsProperties[product.id].liked ? "❤️" : ""}
                   {product.name}
                 </h2>
                 <p className="product__description">{product.description}</p>
