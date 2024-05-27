@@ -1,5 +1,8 @@
 import { useState } from "react";
-import AddItem from "./AddItem.jsx";
+import AddItemElement from "./AddItemElement.jsx";
+import Nav from "./Nav.jsx";
+import { ProductsContext } from "./ProductsContext.jsx";
+import Items from "./Items.jsx";
 import "./App.css";
 
 const productsDefault = [
@@ -25,53 +28,16 @@ const productsDefault = [
 
 function App() {
   const [products, setProducts] = useState(productsDefault);
-
-  function handleDeleteClick(event, product) {
-    setProducts(products.filter((item) => item !== product));
-  }
-
-  function handleLikeClick(event, product) {
-    setProducts(
-      products.map((item) => {
-        if (item == product) {
-          item.liked = !item.liked;
-        }
-        return item;
-      })
-    );
-  }
-
-  const productElements = products.map((product, index) => {
-    return (
-      <>
-        <li className="content__product" key={product.name}>
-          <h2 className="product__title">
-            {product.liked ? "❤️" : ""}
-            {product.name}
-          </h2>
-          <p className="product__description">{product.description}</p>
-          <p className="product__price">${product.price}</p>
-          <button
-            className="product__delete"
-            onClick={(event) => handleDeleteClick(event, product)}>
-            Delete
-          </button>
-          <button className="product__like" onClick={(event) => handleLikeClick(event, product)}>
-            {product.liked ? "Unlike" : "Like"}
-          </button>
-        </li>
-        {index == products.length - 1 ? false : <li className="content__product-divider"></li>}
-      </>
-    );
-  });
+  const [isItemAdding, setItemAdding] = useState(false);
 
   return (
-    <main className="main">
-      <AddItem products={products} onAddItem={(items) => setProducts(items)} />
-      <section className="content">
-        <ol className="content__list">{productElements}</ol>
-      </section>
-    </main>
+    <ProductsContext.Provider value={[products, setProducts]}>
+      <main className="main">
+        <Nav setItemAdding={setItemAdding} />
+        {isItemAdding ? <AddItemElement setItemAdding={setItemAdding} /> : false}
+        <Items />
+      </main>
+    </ProductsContext.Provider>
   );
 }
 
