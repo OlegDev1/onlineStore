@@ -25,39 +25,41 @@ export default function Items({ isCart }) {
   if (isCart) {
     Products = Products.filter((product) => productsProperties[product.id].cart);
   }
+
   return (
     <section className="content">
       <ol className="content__list">
         {Products.map((product, index) => {
+          const productIsLiked = productsProperties[product.id].liked;
+          const prodictIsInCart = productsProperties[product.id].cart;
+
           return (
             <>
               <li className="content__product" key={product.name}>
                 <h2 className="product__title">
-                  {(productsProperties[product.id].liked ? "❤️" : "") +
-                    product.name +
-                    (productsProperties[product.id].cart ? "🛒" : "")}
+                  {(productIsLiked ? "❤️" : "") + product.name + (prodictIsInCart ? "🛒" : "")}
                 </h2>
                 <p className="product__description">{product.description}</p>
                 <p className="product__price">${product.price}</p>
-                <button className="product__delete" onClick={() => handleDeleteClick(product)}>
-                  Delete
-                </button>
-                <button
-                  className="product__like"
-                  onClick={() => handleActionClick(product, "liked")}>
-                  {productsProperties[product.id].like ? "Unlike" : "Like"}
-                </button>
-                <button
-                  className="product__cart"
-                  onClick={() => handleActionClick(product, "cart")}>
-                  {productsProperties[product.id].cart ? "Out of cart" : "In cart"}
-                </button>
+                <div className="product__buttons">
+                  <button className="product__delete" onClick={() => handleDeleteClick(product)}>
+                    Delete
+                  </button>
+                  <button
+                    className="product__like"
+                    onClick={() => handleActionClick(product, "liked")}>
+                    {productIsLiked ? "Unlike" : "Like"}
+                  </button>
+                  <button
+                    className="product__cart"
+                    onClick={() => handleActionClick(product, "cart")}>
+                    {prodictIsInCart ? "Out of cart" : "In cart"}
+                  </button>
+                </div>
               </li>
               {index !== products.length - 1 ? (
                 <li className="content__product-divider"></li>
-              ) : (
-                false
-              )}
+              ) : null}
             </>
           );
         })}

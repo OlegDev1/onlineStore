@@ -5,6 +5,7 @@ import { ProductPropertiesContext } from "./ProductsPropertiesContext";
 
 export default function AddItemElement({ setItemAdding }) {
   const [products, setProducts] = useContext(ProductsContext);
+  const [productsProperties, setProductsProperties] = useContext(ProductPropertiesContext);
   const newProductId = products.length;
   const [newProduct, setNewProduct] = useState({
     id: newProductId,
@@ -12,7 +13,6 @@ export default function AddItemElement({ setItemAdding }) {
     description: "",
     price: 0,
   });
-  const [productsProperties, setProductsProperties] = useContext(ProductPropertiesContext);
 
   function handleCloseClick(event) {
     if (event.currentTarget != event.target) return;
