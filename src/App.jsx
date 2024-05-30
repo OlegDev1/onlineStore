@@ -5,6 +5,7 @@ import { ProductsContext } from "./ProductsContext.jsx";
 import { ProductPropertiesContext } from "./ProductsPropertiesContext.jsx";
 import Items from "./Items.jsx";
 import "./App.css";
+import { Route, Routes } from "react-router-dom";
 
 const productsDefault = [
   {
@@ -27,9 +28,9 @@ const productsDefault = [
   },
 ];
 const productsDefaultProperties = {
-  0: { liked: false },
-  1: { liked: false },
-  2: { liked: false },
+  0: { liked: false, cart: false },
+  1: { liked: false, cart: false },
+  2: { liked: false, cart: false },
 };
 
 function App() {
@@ -38,15 +39,27 @@ function App() {
   const [isItemAdding, setItemAdding] = useState(false);
 
   return (
-    <ProductsContext.Provider value={[products, setProducts]}>
-      <ProductPropertiesContext.Provider value={[productsProperties, setProductsProperties]}>
-        <main className="main">
-          <Nav setItemAdding={setItemAdding} />
-          {isItemAdding ? <AddItemElement setItemAdding={setItemAdding} /> : false}
-          <Items />
-        </main>
-      </ProductPropertiesContext.Provider>
-    </ProductsContext.Provider>
+    <>
+      <ProductsContext.Provider value={[products, setProducts]}>
+        <ProductPropertiesContext.Provider value={[productsProperties, setProductsProperties]}>
+          <main className="main">
+            <Nav setItemAdding={setItemAdding} />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    {isItemAdding ? <AddItemElement setItemAdding={setItemAdding} /> : false}
+                    <Items />
+                  </>
+                }
+              />
+              <Route path="/cart" element={<Items isCart={true} />} />
+            </Routes>
+          </main>
+        </ProductPropertiesContext.Provider>
+      </ProductsContext.Provider>
+    </>
   );
 }
 
