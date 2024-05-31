@@ -19,13 +19,19 @@
   gap: 1rem;
   padding: 1rem;
 }
-
 .addItem__description {
   height: 10%;
 }
-
 .addItemElement > * {
   background-color: #f1f1f1;
   border: none;
   padding: 0.5rem;
+}
+.addItem__submit {
+  border: 2px solid #f1f1f1;
+  border-radius: 5px;
+}
+.addItem__submit:hover {
+  border: 2px solid #c7b7a3;
+  transition: 0.3s;
 }

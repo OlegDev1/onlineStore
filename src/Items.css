@@ -11,6 +11,9 @@
   background-color: grey;
   list-style-type: none;
 }
+.product__title {
+  cursor: pointer;
+}
 .product__buttons {
   display: flex;
   gap: 0.5rem;

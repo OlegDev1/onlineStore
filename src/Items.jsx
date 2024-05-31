@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { ProductsContext } from "./ProductsContext";
 import { ProductPropertiesContext } from "./ProductsPropertiesContext";
 import "./Items.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Items({ isCart }) {
   const [products, setProducts] = useContext(ProductsContext);
   const [productsProperties, setProductsProperties] = useContext(ProductPropertiesContext);
+  const navigate = useNavigate();
 
   function handleDeleteClick(product) {
     setProducts(products.filter((item) => item !== product));
@@ -36,7 +38,7 @@ export default function Items({ isCart }) {
           return (
             <>
               <li className="content__product" key={product.name}>
-                <h2 className="product__title">
+                <h2 className="product__title" onClick={() => navigate(`/product/${product.id}`)}>
                   {(productIsLiked ? "❤️" : "") + product.name + (prodictIsInCart ? "🛒" : "")}
                 </h2>
                 <p className="product__description">{product.description}</p>

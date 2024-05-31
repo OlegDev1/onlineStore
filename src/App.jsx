@@ -6,6 +6,7 @@ import { ProductPropertiesContext } from "./ProductsPropertiesContext.jsx";
 import Items from "./Items.jsx";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
+import ItemDetails from "./ItemDetails.jsx";
 
 const productsDefault = [
   {
@@ -55,6 +56,7 @@ function App() {
                 }
               />
               <Route path="/cart" element={<Items isCart={true} />} />
+              <Route path="/product/:id" element={<ItemDetails />} />
             </Routes>
           </main>
         </ProductPropertiesContext.Provider>

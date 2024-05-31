@@ -1,0 +1,29 @@
+.product-content {
+  padding: 1rem;
+}
+.product-content__title-layout {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.product-content__homeButton {
+  padding: 1rem;
+  background-color: #eadbc8;
+  border: 2px solid #eadbc8;
+  border-radius: 5px;
+}
+.product-content__homeButton:hover {
+  border: 2px solid #c7b7a3;
+  transition: 0.3s;
+}
+.product-content__title {
+  font-size: 3rem;
+}
+.product-content__description {
+  font-size: 1.2rem;
+  font-style: italic;
+  padding-bottom: 1rem;
+}
+.product-content__price {
+  font-size: 2rem;
+}
