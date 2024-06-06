@@ -1,35 +1,29 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Nav.css";
 export default function Nav({ setItemAdding }) {
   const navigate = useNavigate();
+  const location = useLocation().pathname;
   function handleClick() {
     setItemAdding(true);
   }
+  console.log(location);
   return (
     <nav className="nav">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <button className="nav__cart" onClick={() => navigate("/cart")}>
-                Cart
-              </button>
-              <button className="nav__addItemButton" onClick={handleClick}>
-                Add item
-              </button>
-            </>
-          }
-        />
-        <Route
-          path="/cart"
-          element={
-            <button className="nav__home" onClick={() => navigate("/")}>
-              Home page
-            </button>
-          }
-        />
-      </Routes>
+      {location == "/" && (
+        <>
+          <button className="nav__cart" onClick={() => navigate("/cart")}>
+            Cart
+          </button>
+          <button className="nav__addItemButton" onClick={handleClick}>
+            Add item
+          </button>
+        </>
+      )}
+      {location == "/cart" && (
+        <button className="nav__home" onClick={() => navigate("/")}>
+          Home page
+        </button>
+      )}
     </nav>
   );
 }
