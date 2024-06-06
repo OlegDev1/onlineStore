@@ -6,7 +6,7 @@ export default function Nav({ setItemAdding }) {
   function handleClick() {
     setItemAdding(true);
   }
-  console.log(location);
+
   return (
     <nav className="nav">
       {location == "/" && (

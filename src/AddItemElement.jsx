@@ -1,33 +1,8 @@
 import "./AddItemElement.css";
-import { useState, useContext } from "react";
-import { ProductsContext } from "./ProductsContext";
-import { ProductPropertiesContext } from "./ProductsPropertiesContext";
+import useAddItem from "../hooks/useAddItem";
 
 export default function AddItemElement({ setItemAdding }) {
-  const [products, setProducts] = useContext(ProductsContext);
-  const [productsProperties, setProductsProperties] = useContext(ProductPropertiesContext);
-  const newProductId = products.length;
-  const [newProduct, setNewProduct] = useState({
-    id: newProductId,
-    name: "",
-    description: "",
-    price: 0,
-  });
-
-  function handleCloseClick(event) {
-    if (event.currentTarget != event.target) return;
-    setItemAdding(false);
-  }
-
-  function handleSubmitClick() {
-    setProducts([...products, newProduct]);
-    setProductsProperties({ ...productsProperties, [newProductId]: { liked: false } });
-    setItemAdding(false);
-  }
-
-  function handleInputChange(event, field) {
-    setNewProduct({ ...newProduct, [field]: event.target.value });
-  }
+  const { handleInputChange, handleCloseClick, handleSubmitClick } = useAddItem(setItemAdding);
 
   return (
     <div className="addItemElement-background" onClick={handleCloseClick}>

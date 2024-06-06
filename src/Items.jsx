@@ -1,37 +1,15 @@
-import { useContext } from "react";
-import { ProductsContext } from "./ProductsContext";
-import { ProductPropertiesContext } from "./ProductsPropertiesContext";
 import "./Items.css";
 import { useNavigate } from "react-router-dom";
+import useItems from "../hooks/useItems";
 
 export default function Items({ isCart }) {
-  const [products, setProducts] = useContext(ProductsContext);
-  const [productsProperties, setProductsProperties] = useContext(ProductPropertiesContext);
   const navigate = useNavigate();
-
-  function handleDeleteClick(product) {
-    setProducts(products.filter((item) => item !== product));
-  }
-
-  function handleActionClick(product, property) {
-    setProductsProperties({
-      ...productsProperties,
-      [product.id]: {
-        ...productsProperties[product.id],
-        [property]: !productsProperties[product.id][property],
-      },
-    });
-  }
-
-  let Products = [...products];
-  if (isCart) {
-    Products = Products.filter((product) => productsProperties[product.id].cart);
-  }
+  const { products, productsProperties, handleActionClick, handleDeleteClick } = useItems(isCart);
 
   return (
     <section className="content">
       <ol className="content__list">
-        {Products.map((product, index) => {
+        {products.map((product, index) => {
           const productIsLiked = productsProperties[product.id].liked;
           const prodictIsInCart = productsProperties[product.id].cart;
 
