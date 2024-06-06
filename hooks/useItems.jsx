@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { ProductsContext } from "./ProductsContext";
-import { ProductPropertiesContext } from "./ProductsPropertiesContext";
+import { ProductsContext } from "../src/ProductsContext";
+import { ProductPropertiesContext } from "../src/ProductsPropertiesContext";
 
 export default function useItems(isCart) {
   const [products, setProducts] = useContext(ProductsContext);

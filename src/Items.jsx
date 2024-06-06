@@ -1,6 +1,7 @@
 import "./Items.css";
 import { useNavigate } from "react-router-dom";
 import useItems from "../hooks/useItems";
+import { Fragment } from "react";
 
 export default function Items({ isCart }) {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function Items({ isCart }) {
           const prodictIsInCart = productsProperties[product.id].cart;
 
           return (
-            <>
+            <Fragment key={product.id}>
               <li className="content__product" key={product.name}>
                 <h2 className="product__title" onClick={() => navigate(`/product/${product.id}`)}>
                   {(productIsLiked ? "❤️" : "") + product.name + (prodictIsInCart ? "🛒" : "")}
@@ -38,9 +39,9 @@ export default function Items({ isCart }) {
                 </div>
               </li>
               {index !== products.length - 1 ? (
-                <li className="content__product-divider"></li>
+                <li className="content__product-divider" key={product.name + "d"}></li>
               ) : null}
-            </>
+            </Fragment>
           );
         })}
       </ol>
