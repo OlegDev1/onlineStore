@@ -1,10 +1,9 @@
 import { useContext } from "react";
 import { ProductsContext } from "../src/ProductsContext";
-import { ProductPropertiesContext } from "../src/ProductsPropertiesContext";
 
 export default function useItems(isCart) {
-  const [products, setProducts] = useContext(ProductsContext);
-  const [productsProperties, setProductsProperties] = useContext(ProductPropertiesContext);
+  const { products, setProducts, productsProperties, setProductsProperties } =
+    useContext(ProductsContext);
 
   function handleDeleteClick(product) {
     setProducts(products.filter((item) => item !== product));

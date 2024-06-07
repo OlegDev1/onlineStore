@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useItems from "../hooks/useItems";
 import { Fragment } from "react";
 
-export default function Items({ isCart }) {
+export default function Items({ isCart, page }) {
   const navigate = useNavigate();
   const { products, productsProperties, handleActionClick, handleDeleteClick } = useItems(isCart);
 
@@ -17,7 +17,9 @@ export default function Items({ isCart }) {
           return (
             <Fragment key={product.id}>
               <li className="content__product" key={product.name}>
-                <h2 className="product__title" onClick={() => navigate(`/product/${product.id}`)}>
+                <h2
+                  className="product__title"
+                  onClick={() => navigate(`/product/${product.id}`, { state: { page: page } })}>
                   {(productIsLiked ? "❤️" : "") + product.name + (prodictIsInCart ? "🛒" : "")}
                 </h2>
                 <p className="product__description">{product.description}</p>

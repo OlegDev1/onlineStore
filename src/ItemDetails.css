@@ -27,3 +27,14 @@
 .product-content__price {
   font-size: 2rem;
 }
+.product-content__reviews {
+  display: flex;
+  width: 30%;
+  justify-content: center;
+  gap: 1rem;
+  border: 2px solid #c7b7a3;
+  border-radius: 5px;
+}
+.reviews {
+  margin: 0.5rem 0;
+}

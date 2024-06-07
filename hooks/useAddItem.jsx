@@ -1,10 +1,9 @@
 import { useState, useContext } from "react";
 import { ProductsContext } from "../src/ProductsContext";
-import { ProductPropertiesContext } from "../src/ProductsPropertiesContext";
 
 export default function useAddItem(setItemAdding) {
-  const [products, setProducts] = useContext(ProductsContext);
-  const [productsProperties, setProductsProperties] = useContext(ProductPropertiesContext);
+  const { products, setProducts, productsProperties, setProductsProperties } =
+    useContext(ProductsContext);
   const newProductId = products.length;
   const [newProduct, setNewProduct] = useState({
     id: newProductId,

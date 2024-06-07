@@ -19,3 +19,7 @@
   border: 2px solid #c7b7a3;
   transition: 0.3s;
 }
+.content__page.selected {
+  border: 2px solid #b2a392;
+  transition: 0.3s;
+}
