@@ -1,0 +1,21 @@
+.content__pages {
+  list-style-type: none;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: #b5c18e;
+}
+.content__page {
+  padding: 1rem 1.3rem;
+  cursor: pointer;
+  background-color: #eadbc8;
+  border: 2px solid #eadbc8;
+  border-radius: 5px;
+}
+.content__page:hover {
+  border: 2px solid #c7b7a3;
+  transition: 0.3s;
+}

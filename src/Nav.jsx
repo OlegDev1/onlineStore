@@ -6,10 +6,9 @@ export default function Nav({ setItemAdding }) {
   function handleClick() {
     setItemAdding(true);
   }
-
   return (
     <nav className="nav">
-      {location == "/" && (
+      {(location == "/" || location.includes("/page")) && (
         <>
           <button className="nav__cart" onClick={() => navigate("/cart")}>
             Cart

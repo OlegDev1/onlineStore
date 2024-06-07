@@ -1,12 +1,12 @@
-import { useState } from "react";
-import AddItemElement from "./AddItemElement.jsx";
+import { useEffect, useState } from "react";
 import Nav from "./Nav.jsx";
 import { ProductsContext } from "./ProductsContext.jsx";
 import { ProductPropertiesContext } from "./ProductsPropertiesContext.jsx";
-import Items from "./Items.jsx";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import ItemDetails from "./ItemDetails.jsx";
+import ItemDetailsPage from "../routes/ItemDetailsPage.jsx";
+import CartPage from "../routes/CartPage.jsx";
+import HomePage from "../routes/HomePage.jsx";
 
 const productsDefault = [
   {
@@ -38,6 +38,13 @@ function App() {
   const [products, setProducts] = useState(productsDefault);
   const [productsProperties, setProductsProperties] = useState(productsDefaultProperties);
   const [isItemAdding, setItemAdding] = useState(false);
+  const itemPages = 4;
+
+  // useEffect(() => {
+  //   fetch("https://fakestoreapi.com/products")
+  //     .then((res) => res.json())
+  //     .then((res) => console.log(res));
+  // }, []);
 
   return (
     <>
@@ -46,17 +53,30 @@ function App() {
           <main className="main">
             <Nav setItemAdding={setItemAdding} />
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <>
-                    {isItemAdding ? <AddItemElement setItemAdding={setItemAdding} /> : false}
-                    <Items />
-                  </>
-                }
-              />
-              <Route path="/cart" element={<Items isCart={true} />} />
-              <Route path="/product/:id" element={<ItemDetails />} />
+              <Route path="/">
+                <Route
+                  index
+                  element={
+                    <HomePage
+                      isItemAdding={isItemAdding}
+                      setItemAdding={setItemAdding}
+                      itemPages={itemPages}
+                    />
+                  }
+                />
+                <Route
+                  path="page/:id"
+                  element={
+                    <HomePage
+                      isItemAdding={isItemAdding}
+                      setItemAdding={setItemAdding}
+                      itemPages={itemPages}
+                    />
+                  }
+                />
+              </Route>
+              <Route path="/cart" element={<CartPage isCart={true} />} />
+              <Route path="/product/:id" element={<ItemDetailsPage />} />
             </Routes>
           </main>
         </ProductPropertiesContext.Provider>
